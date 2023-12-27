@@ -83,29 +83,29 @@ class LinkedList {
     return index;
   }
 
-  toString(node = this.head) {
-    if (!node) {
+  toStringConsole(node = this.head) {
+    if (!node || !node.value) {
       console.log(null);
       return;
     } else {
       console.log(node.value);
     }
 
-    this.toString(node.next);
+    this.toStringConsole(node.next);
   }
 
-  toStringLine(node = this.head, string = "") {
-    if (!node) {
+  toString(node = this.head, string = "") {
+    if (!node || !node.value) {
       string = string.concat(`null `);
       console.log(string);
       return;
-    } else if (node == this.head && this.head.value != undefined) {
+    } else if (node == this.head) {
       string = `( ${node.value} ) `;
     } else {
       string = string.concat(`( ${node.value} ) `);
     }
     string = string.concat(`--> `);
-    this.toStringLine(node.next, string);
+    this.toString(node.next, string);
   }
 }
 
