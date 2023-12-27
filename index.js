@@ -107,6 +107,36 @@ class LinkedList {
     string = string.concat(`--> `);
     this.toString(node.next, string);
   }
+
+  insertAt(value, index = 0, node = this.head, prev = this.head) {
+    if (index === 0) {
+      if (node === this.head) {
+        this.prepend(value);
+        return;
+      }
+      const newValue = new Node(value);
+      prev.next = newValue;
+      newValue.next = node;
+      return;
+    }
+    if (node.next) {
+      return this.insertAt(value, index - 1, node.next, node);
+    }
+  }
+
+  removeAt(index, node = this.head, prev = this.head) {
+    if (index === 0) {
+      if (node === this.head) {
+        this.head = node.next;
+        return;
+      }
+      prev.next = node.next;
+      return;
+    }
+    if (node.next) {
+      return this.removeAt(index - 1, node.next, node);
+    }
+  }
 }
 
 class Node {
